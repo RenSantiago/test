@@ -37,21 +37,26 @@ class _Login extends State<LoginState> {
 
   TextField Function(TextEditingController params) UsernameField = (params) => TextField(
     controller: params,
-    decoration: const InputDecoration(
-        border: OutlineInputBorder() ,
+    decoration: InputDecoration(
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5)
+        ) ,
         labelText: 'Username',
+        prefixIcon: Icon(Icons.person)
     ),
   );
 
   TextField Function(TextEditingController controller) PasswordField = (controller) => TextField(
     controller : controller,
     obscureText: true,
-    decoration: const InputDecoration(
-      border: OutlineInputBorder() ,
-      labelText: 'Username',
+    decoration: InputDecoration(
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5)
+      ) ,
+      labelText: 'Password',
+      prefixIcon: const Icon(Icons.key)
     ),
   );
-
 
   void handleLogin() {
     if(textController.text.isEmpty || passwordController.text.isEmpty){
@@ -66,6 +71,7 @@ class _Login extends State<LoginState> {
               actions: [
                 TextButton(
                     onPressed: (){
+                      enteredText = '';
                       Navigator.of(context).pop();
                     },
                     child: Text('ok')
@@ -80,7 +86,6 @@ class _Login extends State<LoginState> {
       });
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
