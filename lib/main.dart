@@ -4,7 +4,7 @@ import 'package:testsampleproject/Dashboard.dart';
 import 'package:testsampleproject/Login.dart';
 
 void main() {
-  runApp(App());
+  runApp(const App());
 }
 class App extends StatelessWidget {
   const App({super.key});
@@ -12,13 +12,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'FORM STATE',
+      title: 'super app',
       home: const LoginState(),
       initialRoute: '/login',
       routes: {
-        '/login' : (context) => LoginState(),
-        '/signup' : (context) => AwesomeSignUpPage(),
-        '/dashboard' : (context) => Dashboard()
+        '/login' : (context) => const LoginState(),
+        '/signup' : (context) => const AwesomeSignUpPage(),
+        '/dashboard' : (context) => const Dashboard()
       },
     );
   }

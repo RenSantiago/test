@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:testsampleproject/Models/User.dart';
 
 class Dashboard extends StatelessWidget {
+  const Dashboard({super.key});
+
   @override
   Widget build(BuildContext context) {
     User user = ModalRoute.of(context)?.settings.arguments as User;
@@ -14,7 +16,7 @@ class Dashboard extends StatelessWidget {
         children: [
           Text(
             'Hello ${user.username}  , here is your dashboard' ,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 24 ,
                 fontWeight: FontWeight.bold
             ),

@@ -2,9 +2,19 @@
 import 'package:flutter/material.dart';
 import 'package:testsampleproject/Models/User.dart';
 
-class AwesomeSignUpPage extends StatelessWidget {
+class AwesomeSignUpPage extends StatefulWidget {
+
+  const AwesomeSignUpPage({super.key});
+
+  @override
+  State<AwesomeSignUpPage> createState() => _AwesomeSignUpPageState();
+}
+
+class _AwesomeSignUpPageState extends State<AwesomeSignUpPage> {
   TextEditingController name = TextEditingController();
+
   TextEditingController email = TextEditingController();
+
   TextEditingController password = TextEditingController();
 
   @override
