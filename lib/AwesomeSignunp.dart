@@ -12,7 +12,7 @@ class AwesomeSignUpPage extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/background.jpg'), // Background image
+                  image: AssetImage('assets/bg.jpg'), // Background image
                   fit: BoxFit.cover,
                 ),
               ),

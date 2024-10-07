@@ -5,202 +5,203 @@ void main() {
   runApp(Login());
 }
 
-class SimpleHomePage extends StatelessWidget {
-  const SimpleHomePage({super.key});
-  
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Basics',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
-        useMaterial3: false,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('TITLE HERE'),
-
-        ),
-        body: const Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text('NEW TEXT') ,
-            Text('2nd text'),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('row text'),
-                Text('new row text')
-              ],
-            )
-          ],
-        ),
-      )
-    );
-  }
-}
-
-class NewContainer extends StatelessWidget {
-  const NewContainer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Basics',
-        home: Scaffold(
-          appBar: AppBar(title: const Text('Flutter Basics'),),
-          body: Center(
-            child: Container(
-              height: 200,
-              width: 200 ,
-              decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.all(Radius.circular(10))
-              ),
-              child: const Center(
-                child: Text(
-                  'test here' ,
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white),),
-              ),
-            ),
-          ),
-        )
-    );
-  }
-}
-
-class NewList extends StatelessWidget {
-  const NewList({super.key});
-
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
-      title: 'List Page',
-      home : Scaffold(
-        appBar: AppBar(
-          title: const Text('List Page'),
-        ),
-        body: ListView(
-          children: const [
-            ListTile(
-              title: Text('help'),
-            ),
-            ListBody()
-          ],
-        ),
-      )
-    );
-    throw UnimplementedError();
-  }
-}
-
-class MyListApp extends StatelessWidget {
-  final List<String> items = List.generate(10, (index) => 'Item $index');
-
-  MyListApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('ListView Example')),
-        body: ListView.builder(
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(items[index]),
-              leading: const Icon(Icons.check),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class MyGridApp extends StatelessWidget {
-  const MyGridApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('GridView Example')),
-        body: GridView.count(
-          crossAxisCount: 3, // 2 items per row
-          children: List.generate(6, (index) {
-            return Card(
-              margin: const EdgeInsets.all(10),
-              child: Center(child: Text('Item $index')),
-            );
-          }),
-        ),
-      ),
-    );
-  }
-}
-
-class MyButtonApp extends StatelessWidget {
-  const MyButtonApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Button Example')),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              print('Button Pressed!!!!');
-            },
-            child: const Text('Press Me'),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MyFormApp extends StatelessWidget {
-  const MyFormApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('TextField Example')),
-        body:const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: TextField(
-            decoration: InputDecoration(labelText: 'Enter your name'),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class TodayTest extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Today Test',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Today Test' , style: TextStyle(
-            fontSize: 18,
-
-          ),),
-        ),
-      ),
-    );
-  }
-
-}
+//
+// class SimpleHomePage extends StatelessWidget {
+//   const SimpleHomePage({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Flutter Basics',
+//       theme: ThemeData(
+//         colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
+//         useMaterial3: false,
+//       ),
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: const Text('TITLE HERE'),
+//
+//         ),
+//         body: const Column(
+//           mainAxisAlignment: MainAxisAlignment.start,
+//           children: [
+//             Text('NEW TEXT') ,
+//             Text('2nd text'),
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Text('row text'),
+//                 Text('new row text')
+//               ],
+//             )
+//           ],
+//         ),
+//       )
+//     );
+//   }
+// }
+//
+// class NewContainer extends StatelessWidget {
+//   const NewContainer({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//         title: 'Flutter Basics',
+//         home: Scaffold(
+//           appBar: AppBar(title: const Text('Flutter Basics'),),
+//           body: Center(
+//             child: Container(
+//               height: 200,
+//               width: 200 ,
+//               decoration: const BoxDecoration(
+//                   color: Colors.blue,
+//                   borderRadius: BorderRadius.all(Radius.circular(10))
+//               ),
+//               child: const Center(
+//                 child: Text(
+//                   'test here' ,
+//                   style: TextStyle(
+//                       fontSize: 18,
+//                       color: Colors.white),),
+//               ),
+//             ),
+//           ),
+//         )
+//     );
+//   }
+// }
+//
+// class NewList extends StatelessWidget {
+//   const NewList({super.key});
+//
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // TODO: implement build
+//     return MaterialApp(
+//       title: 'List Page',
+//       home : Scaffold(
+//         appBar: AppBar(
+//           title: const Text('List Page'),
+//         ),
+//         body: ListView(
+//           children: const [
+//             ListTile(
+//               title: Text('help'),
+//             ),
+//             ListBody()
+//           ],
+//         ),
+//       )
+//     );
+//     throw UnimplementedError();
+//   }
+// }
+//
+// class MyListApp extends StatelessWidget {
+//   final List<String> items = List.generate(10, (index) => 'Item $index');
+//
+//   MyListApp({super.key});
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(title: const Text('ListView Example')),
+//         body: ListView.builder(
+//           itemCount: items.length,
+//           itemBuilder: (context, index) {
+//             return ListTile(
+//               title: Text(items[index]),
+//               leading: const Icon(Icons.check),
+//             );
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+// class MyGridApp extends StatelessWidget {
+//   const MyGridApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(title: const Text('GridView Example')),
+//         body: GridView.count(
+//           crossAxisCount: 3, // 2 items per row
+//           children: List.generate(6, (index) {
+//             return Card(
+//               margin: const EdgeInsets.all(10),
+//               child: Center(child: Text('Item $index')),
+//             );
+//           }),
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+// class MyButtonApp extends StatelessWidget {
+//   const MyButtonApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(title: const Text('Button Example')),
+//         body: Center(
+//           child: ElevatedButton(
+//             onPressed: () {
+//               print('Button Pressed!!!!');
+//             },
+//             child: const Text('Press Me'),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+// class MyFormApp extends StatelessWidget {
+//   const MyFormApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(title: const Text('TextField Example')),
+//         body:const Padding(
+//           padding: EdgeInsets.all(16.0),
+//           child: TextField(
+//             decoration: InputDecoration(labelText: 'Enter your name'),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+// class TodayTest extends StatelessWidget {
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Today Test',
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: const Text('Today Test' , style: TextStyle(
+//             fontSize: 18,
+//
+//           ),),
+//         ),
+//       ),
+//     );
+//   }
+//
+// }
 
 
 // class _MyAppState extends State<SimpleFunctionality> {
