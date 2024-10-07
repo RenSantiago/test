@@ -1,10 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:testsampleproject/AwesomeSignunp.dart';
+import 'package:testsampleproject/Dashboard.dart';
 import 'package:testsampleproject/Login.dart';
 
 void main() {
-  runApp(Login());
+  runApp(App());
 }
+class App extends StatelessWidget {
+  const App({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'FORM STATE',
+      home: const LoginState(),
+      initialRoute: '/login',
+      routes: {
+        '/login' : (context) => LoginState(),
+        '/signup' : (context) => AwesomeSignUpPage(),
+        '/dashboard' : (context) => Dashboard()
+      },
+    );
+  }
+}
 //
 // class SimpleHomePage extends StatelessWidget {
 //   const SimpleHomePage({super.key});

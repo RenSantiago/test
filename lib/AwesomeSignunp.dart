@@ -1,7 +1,12 @@
 
 import 'package:flutter/material.dart';
+import 'package:testsampleproject/Models/User.dart';
 
 class AwesomeSignUpPage extends StatelessWidget {
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -10,7 +15,7 @@ class AwesomeSignUpPage extends StatelessWidget {
           children: [
             // Background Image
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/bg.jpg'), // Background image
                   fit: BoxFit.cover,
@@ -31,7 +36,7 @@ class AwesomeSignUpPage extends StatelessWidget {
                         height: 100,
                       ),
                       SizedBox(height: 20),
-                      Text(
+                      const Text(
                         "Create an Account",
                         style: TextStyle(
                           fontSize: 28,
@@ -39,9 +44,10 @@ class AwesomeSignUpPage extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       // Name field
                       TextField(
+                        controller: name,
                         decoration: InputDecoration(
                           hintText: 'Enter your name',
                           filled: true,
@@ -56,6 +62,7 @@ class AwesomeSignUpPage extends StatelessWidget {
                       // Email field
                       TextField(
                         keyboardType: TextInputType.emailAddress,
+                        controller: email,
                         decoration: InputDecoration(
                           hintText: 'Enter your email',
                           filled: true,
@@ -70,6 +77,7 @@ class AwesomeSignUpPage extends StatelessWidget {
                       // Password field
                       TextField(
                         obscureText: true,
+                        controller: password,
                         decoration: InputDecoration(
                           hintText: 'Enter your password',
                           filled: true,
@@ -85,32 +93,36 @@ class AwesomeSignUpPage extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () {
                           // Add signup logic here
+                          User user = User(password: password.text, username: name.text , email: name.text);
+
+                          Navigator.pushNamedAndRemoveUntil(context, '/dashboard' , (_) => false , arguments: user , );
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ), backgroundColor: Colors.blueAccent, // Button color
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
                               vertical: 14.0, horizontal: 80.0),
                           child: Text(
                             "Sign Up",
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ), backgroundColor: Colors.blueAccent, // Button color
-                        ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       // Already have an account
-                      Text(
+                      const Text(
                         "Already have an account?",
                         style: TextStyle(color: Colors.white),
                       ),
                       TextButton(
                         onPressed: () {
                           // Navigate to login screen
+                         Navigator.pop(context);
                         },
-                        child: Text(
+                        child: const Text(
                           "Login",
                           style: TextStyle(color: Colors.yellowAccent),
                         ),
