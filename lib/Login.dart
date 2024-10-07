@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:testsampleproject/AwesomeSignunp.dart';
 import 'package:testsampleproject/Models/User.dart';
 import 'package:testsampleproject/components/Formfield.dart';
 import 'package:testsampleproject/components/LoginButton.dart';
@@ -12,7 +11,6 @@ class LoginState extends StatefulWidget {
 }
 
 class _Login extends State<LoginState> {
-  String enteredText = '';
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -22,23 +20,28 @@ class _Login extends State<LoginState> {
       showDialog(context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Error'),
-              content: Text('No empty fields'),
+              title: const Text('Error'),
+              content: const Text('No empty fields'),
               actions: [
                 TextButton(
                     onPressed: (){
-                      enteredText = '';
                       Navigator.of(context).pop();
                     },
-                    child: Text('ok')
+                    child: const Text('ok')
                 )
               ],
             );
           }
       );
-    } else {
-      User user = User(password: passwordController.text , username: usernameController.text);
-      Navigator.pushNamedAndRemoveUntil(context, '/dashboard' , (_) => false , arguments: user);
+    }
+    else {
+      User user = User(
+          password: passwordController.text.toString() ,
+          username: usernameController.text.toString());
+
+      Navigator
+          .pushNamedAndRemoveUntil(context, '/dashboard' , (_) => false ,
+          arguments: user);
     }
   }
 
@@ -71,9 +74,11 @@ class _Login extends State<LoginState> {
             const SizedBox(
               height: 20,
             ),
-            TextButton(onPressed: () => {
+            TextButton(
+                onPressed: () => {
               Navigator.pushNamed(context, '/signup')
-            }, child: Text('Create an account'))
+            },
+                child: const Text('Create an account'))
           ],
         ),
       ),

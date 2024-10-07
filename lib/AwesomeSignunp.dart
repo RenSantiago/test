@@ -12,9 +12,7 @@ class AwesomeSignUpPage extends StatefulWidget {
 
 class _AwesomeSignUpPageState extends State<AwesomeSignUpPage> {
   TextEditingController name = TextEditingController();
-
   TextEditingController email = TextEditingController();
-
   TextEditingController password = TextEditingController();
 
   @override
@@ -103,7 +101,10 @@ class _AwesomeSignUpPageState extends State<AwesomeSignUpPage> {
                       ElevatedButton(
                         onPressed: () {
                           // Add signup logic here
-                          User user = User(password: password.text, username: name.text , email: name.text);
+                          User user = User(
+                              password: password.text.toString(),
+                              username: name.text.toString() ,
+                              email: name.text.toString());
 
                           Navigator.pushNamedAndRemoveUntil(context, '/dashboard' , (_) => false , arguments: user , );
                         },
