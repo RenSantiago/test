@@ -1,14 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:objectbox/objectbox.dart';
-import 'package:testsampleproject/Models/User.dart';
 import 'package:testsampleproject/Models/UserEntity.dart';
 import 'package:testsampleproject/Models/UserFirestore.dart';
 import 'package:testsampleproject/Services/UserFirestoreService.dart';
 import 'package:testsampleproject/components/Formfield.dart';
 import 'package:testsampleproject/components/LoginButton.dart';
 import 'package:testsampleproject/objectbox.g.dart';
-import 'package:collection/collection.dart';
+
 
 class LoginState extends StatefulWidget {
   final Store store;

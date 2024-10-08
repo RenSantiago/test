@@ -18,7 +18,6 @@ class UserFirestore {
   });
 
   UserFirestore.fromJson(Map<String, Object?> json) : this(
-
       email: json['email'] as String,
       username: json['username'] as String,
       password: json['password'] as String,

@@ -17,7 +17,7 @@ class UserFirestoreService {
 
   Future<UserFirestore> getUser(String username) async {
    final users = await _usersRef.where('username' , isEqualTo: username).limit(1).get();
-   final UserFirestore user = users.docs.first.data() as UserFirestore;
+   UserFirestore user = users.docs.first.data() as UserFirestore;
     return user;
   }
 
