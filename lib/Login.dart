@@ -45,13 +45,22 @@ class _Login extends State<LoginState> {
        } else {
          print('here');
          message = 'invalid credentials';
+         _snackBar();
        }
    } else {
      message = 'invalid credentials';
+     _snackBar();
    }
    query.close();
   }
 
+  void _snackBar() {
+    var snackBar = SnackBar(
+        content: Text(message)
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +92,6 @@ class _Login extends State<LoginState> {
               const SizedBox(
                 height: 20,
               ),
-              message.isNotEmpty ? Text(message) : Text(''),
               LoginButton(onPressed: handleLogin,),
               const SizedBox(
                 height: 20,

@@ -39,6 +39,8 @@ dependencies:
   http: ^1.2.2
   objectbox: ^4.0.2
   objectbox_flutter_libs: ^4.0.2
+  cloud_firestore: ^5.4.4
+  firebase_core: ^3.6.0
 
 dev_dependencies:
   flutter_test:

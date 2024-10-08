@@ -1,12 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:testsampleproject/AwesomeSignunp.dart';
 import 'package:testsampleproject/Dashboard.dart';
 import 'package:testsampleproject/Login.dart';
-import 'package:testsampleproject/Marvel/HeroScreen.dart';
-import 'package:testsampleproject/Marvel/hero.dart';
-import 'package:testsampleproject/Todo/TodoProvider.dart';
-import 'package:testsampleproject/objectbox.dart';
+import 'package:testsampleproject/firebase_options.dart';
+
 import 'package:testsampleproject/objectbox.g.dart';
 
 void main() async{
@@ -23,9 +21,13 @@ void main() async{
   //   )
   // );
 
+
+
   WidgetsFlutterBinding.ensureInitialized();
   final store = await openStore();
-  await Future.delayed(const Duration(milliseconds: 300));
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(App(store));
 
 }
@@ -37,7 +39,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       title: 'super app',
       home: LoginState(store),
       initialRoute: '/login',
