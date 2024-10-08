@@ -41,31 +41,14 @@ class _HeroListState extends State<HeroList> {
           Expanded(child: ListView.builder(
               itemCount: heroes.length,
               itemBuilder: (context, index) {
-                return ListBody(
-                  children: [
-                   Padding(
-                       padding: EdgeInsets.all(10) ,
-                       child:  Row(
-                     mainAxisAlignment: MainAxisAlignment.start,
-                     children: [
-                       Image.network(heroes[index].imageUrl , height: 50 ),
-                       const SizedBox(width: 20),
-                       Column(
-                         crossAxisAlignment: CrossAxisAlignment.start,
-                         children: [
-                           Text(
-                               heroes[index].name ,
-                               style: const TextStyle(
-                                   fontSize: 18 ,
-                                   fontWeight: FontWeight.bold)),
-                           Text(
-                             heroes[index].realName ,
-                             style: const TextStyle(fontSize: 10),)
-                         ],
-                       )
-                     ],
-                   ),)
-                  ],
+                final marvelHero = heroes[index];
+                return ListTile(
+                  onTap: () => {
+                    print(marvelHero)
+                  },
+                  leading:  Image.network(heroes[index].imageUrl , height: 50 ),
+                  title: Text(marvelHero.name , style: TextStyle(fontSize: 18 ,fontWeight: FontWeight.bold),),
+                  subtitle: Text(marvelHero.realName),
                 );
               }))
         ],

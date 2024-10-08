@@ -1,10 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:testsampleproject/Models/User.dart';
+import 'package:objectbox/objectbox.dart';
+import 'package:testsampleproject/Models/UserEntity.dart';
 
 class AwesomeSignUpPage extends StatefulWidget {
-
-  const AwesomeSignUpPage({super.key});
+  final Store store;
+  const AwesomeSignUpPage(this.store);
 
   @override
   State<AwesomeSignUpPage> createState() => _AwesomeSignUpPageState();
@@ -14,6 +15,33 @@ class _AwesomeSignUpPageState extends State<AwesomeSignUpPage> {
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  late final Box<UserEntity> _userBox;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _userBox = widget.store.box<UserEntity>();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    name.dispose();
+    email.dispose();
+    password.dispose();
+
+    super.dispose();
+
+  }
+
+  void handleSignup() {
+    UserEntity payload = UserEntity(username: name.text, email: email.text, password: password.text);
+    _userBox.put(payload);
+    Navigator.pop(context);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -103,15 +131,7 @@ class _AwesomeSignUpPageState extends State<AwesomeSignUpPage> {
                         SizedBox(height: 30),
                         // Signup button
                         ElevatedButton(
-                          onPressed: () {
-                            // Add signup logic here
-                            User user = User(
-                                password: password.text.toString(),
-                                username: name.text.toString() ,
-                                email: name.text.toString());
-
-                            Navigator.pushNamedAndRemoveUntil(context, '/dashboard' , (_) => false , arguments: user , );
-                          },
+                          onPressed: handleSignup,
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),

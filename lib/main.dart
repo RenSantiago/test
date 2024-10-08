@@ -6,34 +6,45 @@ import 'package:testsampleproject/Login.dart';
 import 'package:testsampleproject/Marvel/HeroScreen.dart';
 import 'package:testsampleproject/Marvel/hero.dart';
 import 'package:testsampleproject/Todo/TodoProvider.dart';
+import 'package:testsampleproject/objectbox.dart';
+import 'package:testsampleproject/objectbox.g.dart';
 
-void main() {
-  runApp(MultiProvider(
-      providers: [
-      ChangeNotifierProvider(
-        create: (context) => TodoProvider()
-        ),
-        FutureProvider<List<MarvelHero>>(
-            create: (context) => getHeroes(),
-            initialData: const [])
-      ],
-    child: const HeroScreen(),
-    )
-  );
+void main() async{
+  // runApp(MultiProvider(
+  //     providers: [
+  //     ChangeNotifierProvider(
+  //       create: (context) => TodoProvider()
+  //       ),
+  //       FutureProvider<List<MarvelHero>>(
+  //           create: (context) => getHeroes(),
+  //           initialData: const [])
+  //     ],
+  //   child: const HeroScreen(),
+  //   )
+  // );
+
+  WidgetsFlutterBinding.ensureInitialized();
+  final store = await openStore();
+  await Future.delayed(const Duration(milliseconds: 300));
+  runApp(App(store));
+
 }
 class App extends StatelessWidget {
-  const App({super.key});
+  final Store store;
+
+  const App(this.store , {super.key });
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       title: 'super app',
-      home: const LoginState(),
+      home: LoginState(store),
       initialRoute: '/login',
       routes: {
-        '/login' : (context) => const LoginState(),
-        '/signup' : (context) => const AwesomeSignUpPage(),
-        '/dashboard' : (context) => const Dashboard()
+        '/login' : (context) =>  LoginState(store),
+        '/signup' : (context) => AwesomeSignUpPage(store),
+        '/dashboard' : (context) => Dashboard(store)
       },
     );
   }

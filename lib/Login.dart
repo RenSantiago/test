@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:objectbox/objectbox.dart';
 import 'package:testsampleproject/Models/User.dart';
+import 'package:testsampleproject/Models/UserEntity.dart';
 import 'package:testsampleproject/components/Formfield.dart';
 import 'package:testsampleproject/components/LoginButton.dart';
+import 'package:testsampleproject/objectbox.g.dart';
 
 
 class LoginState extends StatefulWidget {
-  const LoginState({super.key});
+  final Store store;
+  const LoginState(this.store);
   @override
   _Login createState() => _Login();
 }
@@ -15,34 +19,37 @@ class _Login extends State<LoginState> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  void handleLogin() {
-    if(usernameController.text.isEmpty || passwordController.text.isEmpty){
-      showDialog(context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Error'),
-              content: const Text('No empty fields'),
-              actions: [
-                TextButton(
-                    onPressed: (){
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('ok')
-                )
-              ],
-            );
-          }
-      );
-    }
-    else {
-      User user = User(
-          password: passwordController.text.toString() ,
-          username: usernameController.text.toString());
+  String message = '';
+  late final Box<UserEntity> _userBox;
 
-      Navigator
-          .pushNamedAndRemoveUntil(context, '/dashboard' , (_) => false ,
-          arguments: user);
-    }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _userBox = widget.store.box<UserEntity>();
+  }
+
+
+
+  void handleLogin() {
+   final query = _userBox
+       .query(UserEntity_.username.equals(usernameController.text))
+       .build();
+
+   final users =  query.find();
+
+   if(users.isNotEmpty) {
+       final dbPassword = users.first.password;
+       if(dbPassword == passwordController.text) {
+         Navigator.pushNamedAndRemoveUntil(context, '/dashboard', (_) => false , arguments: usernameController.text);
+       } else {
+         print('here');
+         message = 'invalid credentials';
+       }
+   } else {
+     message = 'invalid credentials';
+   }
+   query.close();
   }
 
   @override
@@ -73,6 +80,10 @@ class _Login extends State<LoginState> {
                   fieldIcon: const Icon(Icons.key),
                   obscure: true
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              message.isNotEmpty ? Text(message) : Text(''),
               LoginButton(onPressed: handleLogin,),
               const SizedBox(
                 height: 20,
