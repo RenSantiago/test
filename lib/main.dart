@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:testsampleproject/AwesomeSignunp.dart';
 import 'package:testsampleproject/Dashboard.dart';
 import 'package:testsampleproject/Login.dart';
+import 'package:testsampleproject/Marvel/HeroScreen.dart';
+import 'package:testsampleproject/Marvel/hero.dart';
+import 'package:testsampleproject/Todo/TodoProvider.dart';
+
+
 
 void main() {
-  runApp(const App());
+  runApp(MultiProvider(
+      child: HeroScreen(),
+      providers: [
+      ChangeNotifierProvider(
+        create: (context) => TodoProvider()
+        ),
+        FutureProvider<List<MarvelHero>>(
+            create: (context) => getHeroes(),
+            initialData: [])
+      ]
+    )
+  );
 }
 class App extends StatelessWidget {
   const App({super.key});

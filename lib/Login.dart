@@ -48,38 +48,42 @@ class _Login extends State<LoginState> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Welcome' ,
-              style: TextStyle(
-                fontSize: 34,
-                fontWeight: FontWeight.w700
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 400),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Welcome' ,
+                style: TextStyle(
+                    fontSize: 34,
+                    fontWeight: FontWeight.w700
+                ),
               ),
-            ),
-            MyFormField(
-                controller: usernameController ,
-                label: 'Username' ,
-                fieldIcon: const Icon(Icons.person)
-            ),
-            MyFormField(
-              controller: passwordController ,
-              label: 'Password' ,
-              fieldIcon: const Icon(Icons.key),
-            obscure: true
-            ),
-            LoginButton(onPressed: handleLogin,),
-            const SizedBox(
-              height: 20,
-            ),
-            TextButton(
-                onPressed: () => {
-              Navigator.pushNamed(context, '/signup')
-            },
-                child: const Text('Create an account'))
-          ],
+              MyFormField(
+                  controller: usernameController ,
+                  label: 'Username' ,
+                  fieldIcon: const Icon(Icons.person)
+              ),
+              MyFormField(
+                  controller: passwordController ,
+                  label: 'Password' ,
+                  fieldIcon: const Icon(Icons.key),
+                  obscure: true
+              ),
+              LoginButton(onPressed: handleLogin,),
+              const SizedBox(
+                height: 20,
+              ),
+              TextButton(
+                  onPressed: () => {
+                    Navigator.pushNamed(context, '/signup')
+                  },
+                  child: const Text('Create an account'))
+            ],
+          ),
         ),
       ),
     );
