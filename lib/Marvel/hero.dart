@@ -1,18 +1,15 @@
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:testsampleproject/Marvel/hero.dart';
+
 
 class MarvelHero {
   final String name;
-  final String realname;
-  final String imageurl;
+  final String realName;
+  final String imageUrl;
 
-  MarvelHero({required this.name ,required this.realname , required this.imageurl});
+  MarvelHero({required this.name ,required this.realName , required this.imageUrl});
 
 }
-
 
 String heroURL = 'https://simplifiedcoding.net/demos/marvel/';
 
@@ -25,8 +22,8 @@ Future<List<MarvelHero>> getHeroes() async  {
       _marvelHero.add(
           MarvelHero(
               name: hero['name'] ,
-              realname: hero['realname'] ,
-              imageurl: hero['imageurl']));
+              realName: hero['realname'] ,
+              imageUrl: hero['imageurl']));
     }
     return _marvelHero;
   }

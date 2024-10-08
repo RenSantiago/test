@@ -3,8 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:testsampleproject/Marvel/hero.dart';
 
 class HeroScreen extends StatelessWidget{
+  const HeroScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
+
     // TODO: implement build
     return MaterialApp(
       title: 'Heroes',
@@ -20,38 +23,49 @@ class HeroList extends StatefulWidget {
 
 class _HeroListState extends State<HeroList> {
 
-
-
   @override
   Widget build(BuildContext context) {
-   final  heroes = Provider.of<List<MarvelHero>>(context);
+   final heroes = Provider.of<List<MarvelHero>>(context);
 
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: const Text('Heroes'),
       ),
-      body: Column(
+      body: heroes.isEmpty ?
+      const Center(
+        child: CircularProgressIndicator(),
+      ) :
+      Column(
         children: [
           Expanded(child: ListView.builder(
               itemCount: heroes.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Image.network(heroes[index].imageurl , height: 50 ),
-                      SizedBox(width: 20),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(heroes[index].name!),
-                          Text(heroes[index].realname , style: TextStyle(fontSize: 10),)
-                        ],
-                      )
-                    ],
-                  ),
-
+                return ListBody(
+                  children: [
+                   Padding(
+                       padding: EdgeInsets.all(10) ,
+                       child:  Row(
+                     mainAxisAlignment: MainAxisAlignment.start,
+                     children: [
+                       Image.network(heroes[index].imageUrl , height: 50 ),
+                       const SizedBox(width: 20),
+                       Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           Text(
+                               heroes[index].name ,
+                               style: const TextStyle(
+                                   fontSize: 18 ,
+                                   fontWeight: FontWeight.bold)),
+                           Text(
+                             heroes[index].realName ,
+                             style: const TextStyle(fontSize: 10),)
+                         ],
+                       )
+                     ],
+                   ),)
+                  ],
                 );
               }))
         ],

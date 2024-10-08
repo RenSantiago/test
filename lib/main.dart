@@ -7,19 +7,17 @@ import 'package:testsampleproject/Marvel/HeroScreen.dart';
 import 'package:testsampleproject/Marvel/hero.dart';
 import 'package:testsampleproject/Todo/TodoProvider.dart';
 
-
-
 void main() {
   runApp(MultiProvider(
-      child: HeroScreen(),
       providers: [
       ChangeNotifierProvider(
         create: (context) => TodoProvider()
         ),
         FutureProvider<List<MarvelHero>>(
             create: (context) => getHeroes(),
-            initialData: [])
-      ]
+            initialData: const [])
+      ],
+    child: const HeroScreen(),
     )
   );
 }
