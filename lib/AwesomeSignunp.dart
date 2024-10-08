@@ -1,7 +1,10 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:objectbox/objectbox.dart';
 import 'package:testsampleproject/Models/UserEntity.dart';
+import 'package:testsampleproject/Models/UserFirestore.dart';
+import 'package:testsampleproject/Services/UserFirestoreService.dart';
 
 class AwesomeSignUpPage extends StatefulWidget {
   final Store store;
@@ -16,7 +19,7 @@ class _AwesomeSignUpPageState extends State<AwesomeSignUpPage> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   late final Box<UserEntity> _userBox;
-
+  final UserFirestoreService _userFirestoreService = UserFirestoreService();
 
   @override
   void initState() {
@@ -37,8 +40,15 @@ class _AwesomeSignUpPageState extends State<AwesomeSignUpPage> {
   }
 
   void handleSignup() {
-    UserEntity payload = UserEntity(username: name.text, email: email.text, password: password.text);
-    _userBox.put(payload);
+    UserFirestore _user = UserFirestore(
+        username: name.text,
+        email: email.text,
+        password: password.text,
+        createdOn: Timestamp.now(),
+        updatedOn: Timestamp.now()
+    );
+
+    _userFirestoreService.addUser(_user);
     Navigator.pop(context);
   }
 

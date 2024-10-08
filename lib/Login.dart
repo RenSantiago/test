@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:objectbox/objectbox.dart';
 import 'package:testsampleproject/Models/User.dart';
 import 'package:testsampleproject/Models/UserEntity.dart';
+import 'package:testsampleproject/Models/UserFirestore.dart';
+import 'package:testsampleproject/Services/UserFirestoreService.dart';
 import 'package:testsampleproject/components/Formfield.dart';
 import 'package:testsampleproject/components/LoginButton.dart';
 import 'package:testsampleproject/objectbox.g.dart';
-
+import 'package:collection/collection.dart';
 
 class LoginState extends StatefulWidget {
   final Store store;
@@ -21,6 +24,7 @@ class _Login extends State<LoginState> {
 
   String message = '';
   late final Box<UserEntity> _userBox;
+  UserFirestoreService _userFirestoreService = UserFirestoreService();
 
   @override
   void initState() {
@@ -29,29 +33,17 @@ class _Login extends State<LoginState> {
     _userBox = widget.store.box<UserEntity>();
   }
 
-
-
-  void handleLogin() {
-   final query = _userBox
-       .query(UserEntity_.username.equals(usernameController.text))
-       .build();
-
-   final users =  query.find();
-
-   if(users.isNotEmpty) {
-       final dbPassword = users.first.password;
-       if(dbPassword == passwordController.text) {
-         Navigator.pushNamedAndRemoveUntil(context, '/dashboard', (_) => false , arguments: usernameController.text);
-       } else {
-         print('here');
-         message = 'invalid credentials';
-         _snackBar();
-       }
-   } else {
-     message = 'invalid credentials';
-     _snackBar();
-   }
-   query.close();
+  void handleLogin() async {
+  try{
+   UserFirestore user = await _userFirestoreService.getUser(usernameController.text);
+    if(user.password != passwordController.text) {
+      throw();
+    };
+   Navigator.pushNamedAndRemoveUntil(context, '/dashboard', (_) => false , arguments: usernameController.text);
+  } catch(err) {
+    message = 'invalid credentials';
+    _snackBar();
+  }
   }
 
   void _snackBar() {
