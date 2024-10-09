@@ -7,7 +7,7 @@ import 'package:testsampleproject/Services/UserFirestoreService.dart';
 import 'package:testsampleproject/components/Formfield.dart';
 import 'package:testsampleproject/components/LoginButton.dart';
 import 'package:testsampleproject/objectbox.g.dart';
-
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class LoginState extends StatefulWidget {
   final Store store;
@@ -34,38 +34,47 @@ class _Login extends State<LoginState> {
   }
 
   void handleLoginViaPhone() async {
-      await _auth.verifyPhoneNumber(
-          phoneNumber: usernameController.text.trim(),
-          verificationCompleted: (PhoneAuthCredential credential) async {
-            // Auto verification success
-            await _auth.signInWithCredential(credential);
-            print('success');
-            // Handle successful login here
-          },
-          verificationFailed: (FirebaseAuthException e) {
-            print('success coming');
-
-            // // Handle error
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text("Verification failed: ${e.message}"),
-            ));
-          },
-        codeSent: (String verificationId, int? resendToken) {
-          // Code sent to user's phone
-          setState(() {
-            _verificationId = verificationId;
-            print('codeSent $_verificationId');
-
-          });
-          print('codeSent');
-
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-          // Auto-retrieval timeout
-          print('codeAutoRetrievalTimeout');
-
+      try {
+        String phoneNumber = usernameController.text.trim();
+        if(phoneNumber.isEmpty) {
+          throw();
         }
-      );
+        await _auth.verifyPhoneNumber(
+            phoneNumber: phoneNumber,
+            verificationCompleted: (PhoneAuthCredential credential) async {
+              // Auto verification success
+              await _auth.signInWithCredential(credential);
+              print('success');
+              // Handle successful login here
+            },
+            verificationFailed: (FirebaseAuthException e) {
+              print('success coming');
+
+              // // Handle error
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text("Verification failed: ${e.message}"),
+              ));
+            },
+            codeSent: (String verificationId, int? resendToken) {
+              // Code sent to user's phone
+              setState(() {
+                _verificationId = verificationId;
+                print('codeSent $_verificationId');
+
+              });
+              print('codeSent');
+
+            },
+            codeAutoRetrievalTimeout: (String verificationId) {
+              // Auto-retrieval timeout
+              print('codeAutoRetrievalTimeout');
+
+            }
+        );
+      } catch(err) {
+        message = 'invalid credentials' ;
+        _snackBar();
+      }
   }
 
   void handleOtp() async {
@@ -111,6 +120,22 @@ class _Login extends State<LoginState> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
+  Widget showWidgetIfEmpty(Widget yourWidget) {
+    if(_verificationId.isEmpty) {
+      return yourWidget;
+    } else {
+      return SizedBox();
+    }
+  }
+
+  Widget showWidgetIfNotEmpty(Widget yourWidget) {
+    if(_verificationId.isNotEmpty) {
+      return yourWidget;
+    } else {
+      return SizedBox();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,16 +159,25 @@ class _Login extends State<LoginState> {
                   fieldIcon: const Icon(Icons.phone),
                   editable: _verificationId.isEmpty,
               ),
-              if(_verificationId.isNotEmpty) MyFormField(
+              showWidgetIfNotEmpty(MyFormField(
                   controller: passwordController ,
                   label: 'otp' ,
                   fieldIcon: const Icon(Icons.key),
                   obscure: true
-              ),
+              )) ,
               const SizedBox(
                 height: 20,
               ),
-              _verificationId.isEmpty ? LoginButton(onPressed: handleLoginViaPhone , label: 'Sign in',) : LoginButton(onPressed: handleOtp , label: 'Send OTP Details',),
+              _verificationId.isEmpty ?
+                LoginButton(onPressed: handleLoginViaPhone , label: 'Sign in',) :
+                LoginButton(onPressed: handleOtp , label: 'Send OTP Details',),
+              showWidgetIfEmpty(SignInButton(
+                Buttons.Facebook,
+                mini: true,
+                onPressed: () {
+                  print('im pressed');
+                },
+              )),
               const SizedBox(
                 height: 20,
               ),
@@ -151,7 +185,8 @@ class _Login extends State<LoginState> {
                   onPressed: () => {
                     Navigator.pushNamed(context, '/signup')
                   },
-                  child: const Text('Create an account'))
+                  child: const Text('Create an account')),
+
             ],
           ),
         ),
