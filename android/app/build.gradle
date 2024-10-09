@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "test.com.example.testsampleproject"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 34 //flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -27,8 +27,8 @@ android {
         applicationId = "test.com.example.testsampleproject"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        minSdk = 23 //flutter.minSdkVersion
+        targetSdk = 34//flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
@@ -40,8 +40,18 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+
+
 }
 
 flutter {
     source = "../.."
 }
+
+dependencies {
+    // Firebase SDK for Firestore
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.7.1'
+    implementation 'androidx.browser:browser:1.2.0'
+}
+// Apply the Google services plugin at the end
+apply plugin: 'com.google.gms.google-services'

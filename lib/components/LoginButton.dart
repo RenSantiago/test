@@ -11,8 +11,9 @@ class LoginButton extends StatelessWidget {
       )
   );
 
-  LoginButton({super.key , required this.onPressed});
+  LoginButton({super.key , required this.onPressed , required this.label});
   final void Function() onPressed;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +24,8 @@ class LoginButton extends StatelessWidget {
         child: ElevatedButton(
             onPressed: onPressed,
             style: buttonStyle,
-            child: const Text(
-              'Login' ,
+            child: Text(
+              label ,
               style: TextStyle(
                   fontSize:
                   16

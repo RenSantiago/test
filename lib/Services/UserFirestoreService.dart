@@ -17,8 +17,20 @@ class UserFirestoreService {
 
   Future<UserFirestore> getUser(String username) async {
    final users = await _usersRef.where('username' , isEqualTo: username).limit(1).get();
-   UserFirestore user = users.docs.first.data() as UserFirestore;
-    return user;
+   final String id = users.docs.first.id;
+   UserFirestore userdata = users.docs.first.data() as UserFirestore;
+   return  UserFirestore(
+        id: id,
+        username: userdata.username,
+        email: userdata.email,
+        password: userdata.password
+    );;
+  }
+
+  Future<UserFirestore> getUserById(String id) async {
+    final user = await _usersRef.doc(id).get();
+    final userData = user.data() as UserFirestore;
+    return userData;
   }
 
   Stream<QuerySnapshot> getUsers() {

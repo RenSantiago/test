@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:objectbox/objectbox.dart';
 import 'package:testsampleproject/Models/UserEntity.dart';
+import 'package:testsampleproject/Models/UserFirestore.dart';
+import 'package:testsampleproject/Services/UserFirestoreService.dart';
 import 'package:testsampleproject/objectbox.g.dart';
 
 class Dashboard extends StatefulWidget {
@@ -13,7 +15,8 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   late final Box<UserEntity> _userBox;
-  static late  UserEntity user = UserEntity(username: '', email: '', password: '');
+  static late  UserFirestore user = UserFirestore(username: '', email: '', password: '');
+  final UserFirestoreService _userFirestoreService = UserFirestoreService();
 
   @override
   void initState() {
@@ -23,15 +26,13 @@ class _DashboardState extends State<Dashboard> {
 
   }
 
-  @override void didChangeDependencies() {
+  @override void didChangeDependencies() async{
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     try {
-      String username = ModalRoute.of(context)?.settings.arguments as String;
-      print(username);
-      final query = _userBox.query(UserEntity_.username.equals(username)).build();
-      user = query.findFirst()!;
-      query.close();
+      String userId = ModalRoute.of(context)?.settings.arguments as String;
+      print(userId);
+      user = await _userFirestoreService.getUserById(userId);
     }catch(e) {
       print('error : $e' );
     }

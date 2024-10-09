@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserFirestore {
-
+  String? id;
   String username;
   String email;
   String password;
@@ -9,7 +9,7 @@ class UserFirestore {
   Timestamp? updatedOn;
 
   UserFirestore({
-
+    this.id,
     required this.username,
     required this.email,
     required this.password,
