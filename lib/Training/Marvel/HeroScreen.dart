@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:testsampleproject/Marvel/hero.dart';
+import 'package:testsampleproject/Training/Marvel/hero.dart';
 
 class HeroScreen extends StatelessWidget{
   const HeroScreen({super.key});

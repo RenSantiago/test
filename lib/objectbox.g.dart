@@ -14,8 +14,8 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
-import 'Models/UserEntity.dart';
-import 'MyGate.dart';
+import 'Training/Models/UserEntity.dart';
+import 'Training/MyGate.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 

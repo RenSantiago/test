@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:objectbox/objectbox.dart';
-import 'package:testsampleproject/Models/UserEntity.dart';
-import 'package:testsampleproject/Models/UserFirestore.dart';
-import 'package:testsampleproject/Services/UserFirestoreService.dart';
-import 'package:testsampleproject/components/Formfield.dart';
-import 'package:testsampleproject/components/LoginButton.dart';
+import 'package:testsampleproject/Training/Models/UserEntity.dart';
+import 'package:testsampleproject/Training/Models/UserFirestore.dart';
+import 'package:testsampleproject/Training/Services/UserFirestoreService.dart';
+import 'package:testsampleproject/Training/components/Formfield.dart';
+import 'package:testsampleproject/Training/components/LoginButton.dart';
 import 'package:testsampleproject/objectbox.g.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
@@ -139,7 +139,6 @@ class _Login extends State<LoginState> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Center(
         child: Container(
           constraints: const BoxConstraints(maxWidth: 400),
@@ -172,8 +171,8 @@ class _Login extends State<LoginState> {
                 LoginButton(onPressed: handleLoginViaPhone , label: 'Sign in',) :
                 LoginButton(onPressed: handleOtp , label: 'Send OTP Details',),
               showWidgetIfEmpty(SignInButton(
-                Buttons.Facebook,
-                mini: true,
+                Buttons.Twitter,
+                mini : true,
                 onPressed: () {
                   print('im pressed');
                 },

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:testsampleproject/Models/UserFirestore.dart';
+import 'package:testsampleproject/Training/Models/UserFirestore.dart';
 
 const String USER_COLLECTION_REF = 'users';
 

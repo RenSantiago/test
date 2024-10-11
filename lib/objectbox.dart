@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:objectbox/objectbox.dart';
 import 'objectbox.g.dart'; // Generated code
-import 'MyGate.dart'; // Assuming you saved your MyGate class in this file
+import 'Training/MyGate.dart'; // Assuming you saved your MyGate class in this file
 
 
 void main() async {

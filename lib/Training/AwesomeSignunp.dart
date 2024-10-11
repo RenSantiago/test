@@ -2,9 +2,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:objectbox/objectbox.dart';
-import 'package:testsampleproject/Models/UserEntity.dart';
-import 'package:testsampleproject/Models/UserFirestore.dart';
-import 'package:testsampleproject/Services/UserFirestoreService.dart';
+import 'package:testsampleproject/Training/Models/UserEntity.dart';
+import 'package:testsampleproject/Training/Models/UserFirestore.dart';
+import 'package:testsampleproject/Training/Services/UserFirestoreService.dart';
 
 class AwesomeSignUpPage extends StatefulWidget {
   final Store store;
